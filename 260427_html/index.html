@@ -1,0 +1,306 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: 'Apple SD Gothic Neo', 'Malgun Gothic', sans-serif;
+        }
+
+        header {
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+            padding: 0 40px;
+            height: 72px;
+            background-color: #fff;
+            border-bottom: 1px solid #e0e0e0;
+            position: sticky;
+            top: 0;
+            z-index: 100;
+        }
+
+        .header-logo {
+            font-size: 20px;
+            font-weight: 800;
+            color: #000;
+            letter-spacing: 2px;
+            text-decoration: none;
+        }
+
+        /* ── 데스크탑 nav ── */
+        .header-nav {
+            display: flex;
+            gap: 48px;
+            list-style: none;
+        }
+
+        .header-nav a {
+            text-decoration: none;
+            font-size: 15px;
+            font-weight: 500;
+            color: #000;
+            letter-spacing: -0.3px;
+            transition: opacity 0.2s;
+        }
+
+        .header-nav a:hover {
+            opacity: 0.5;
+        }
+
+        /* ── 오른쪽 유틸 ── */
+        .header-right {
+            display: flex;
+            align-items: center;
+            gap: 16px;
+        }
+
+        .header-lang {
+            display: flex;
+            align-items: center;
+            gap: 10px;
+            list-style: none;
+        }
+
+        .header-lang li {
+            font-size: 13px;
+            font-weight: 500;
+            color: #000;
+            cursor: pointer;
+            transition: opacity 0.2s;
+        }
+
+        .header-lang li:hover {
+            opacity: 0.5;
+        }
+
+        .header-lang .active {
+            font-weight: 700;
+        }
+
+        .header-lang .divider {
+            color: #ccc;
+            cursor: default;
+        }
+
+        .header-lang .divider:hover {
+            opacity: 1;
+        }
+
+        .header-search {
+            background: none;
+            border: none;
+            cursor: pointer;
+            padding: 4px;
+            display: flex;
+            align-items: center;
+            transition: opacity 0.2s;
+        }
+
+        .header-search:hover {
+            opacity: 0.5;
+        }
+
+        .header-search svg {
+            width: 20px;
+            height: 20px;
+        }
+
+        /* ── 햄버거 버튼 (모바일에서만 표시) ── */
+        .hamburger {
+            display: none;
+            flex-direction: column;
+            justify-content: center;
+            gap: 5px;
+            background: none;
+            border: none;
+            cursor: pointer;
+            padding: 4px;
+            width: 32px;
+            height: 32px;
+        }
+
+        .hamburger span {
+            display: block;
+            width: 22px;
+            height: 2px;
+            background-color: #000;
+            transition: transform 0.3s, opacity 0.3s;
+            transform-origin: center;
+        }
+
+        /* 열렸을 때 X 모양 */
+        .hamburger.open span:nth-child(1) {
+            transform: translateY(7px) rotate(45deg);
+        }
+
+        .hamburger.open span:nth-child(2) {
+            opacity: 0;
+        }
+
+        .hamburger.open span:nth-child(3) {
+            transform: translateY(-7px) rotate(-45deg);
+        }
+
+        /* ── 모바일 드로어 ── */
+        .mobile-menu {
+            display: none;
+            position: fixed;
+            top: 72px;
+            left: 0;
+            right: 0;
+            bottom: 0;
+            background-color: #fff;
+            z-index: 99;
+            flex-direction: column;
+            padding: 24px 28px;
+            border-top: 1px solid #e0e0e0;
+            overflow-y: auto;
+        }
+
+        .mobile-menu.open {
+            display: flex;
+        }
+
+        .mobile-nav {
+            list-style: none;
+            display: flex;
+            flex-direction: column;
+        }
+
+        .mobile-nav li {
+            border-bottom: 1px solid #f0f0f0;
+        }
+
+        .mobile-nav a {
+            display: block;
+            padding: 20px 0;
+            font-size: 16px;
+            font-weight: 500;
+            color: #000;
+            text-decoration: none;
+            transition: opacity 0.2s;
+        }
+
+        .mobile-nav a:hover {
+            opacity: 0.5;
+        }
+
+        .mobile-lang {
+            display: flex;
+            align-items: center;
+            gap: 12px;
+            list-style: none;
+            margin-top: 32px;
+        }
+
+        .mobile-lang li {
+            font-size: 13px;
+            font-weight: 500;
+            color: #000;
+            cursor: pointer;
+        }
+
+        .mobile-lang .active {
+            font-weight: 700;
+        }
+
+        .mobile-lang .divider {
+            color: #ccc;
+            cursor: default;
+        }
+
+        /* ── 반응형 분기점 ── */
+        @media (max-width: 768px) {
+            header {
+                padding: 0 20px;
+            }
+
+            nav,
+            .header-right {
+                display: none;
+            }
+
+            .hamburger {
+                display: flex;
+            }
+        }
+    </style>
+</head>
+<body>
+    <header>
+        <a href="#" class="header-logo">LOGO</a>
+
+        <nav>
+            <ul class="header-nav">
+                <li><a href="#">회사소개</a></li>
+                <li><a href="#">제품소개</a></li>
+                <li><a href="#">문의게시판</a></li>
+            </ul>
+        </nav>
+
+        <div class="header-right">
+            <ul class="header-lang">
+                <li class="active">KR</li>
+                <li class="divider">|</li>
+                <li>EN</li>
+            </ul>
+            <button class="header-search" aria-label="검색">
+                <svg viewBox="0 0 24 24" fill="none" stroke="#000" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+                    <circle cx="11" cy="11" r="7"/>
+                    <line x1="17" y1="17" x2="22" y2="22"/>
+                </svg>
+            </button>
+        </div>
+
+        <button class="hamburger" aria-label="메뉴 열기" id="hamburgerBtn">
+            <span></span>
+            <span></span>
+            <span></span>
+        </button>
+    </header>
+
+    <!-- 모바일 드로어 -->
+    <div class="mobile-menu" id="mobileMenu">
+        <ul class="mobile-nav">
+            <li><a href="#">회사소개</a></li>
+            <li><a href="#">제품소개</a></li>
+            <li><a href="#">문의게시판</a></li>
+        </ul>
+        <ul class="mobile-lang">
+            <li class="active">KR</li>
+            <li class="divider">|</li>
+            <li>EN</li>
+        </ul>
+    </div>
+
+    <div></div>
+    <footer></footer>
+
+    <script>
+        const btn = document.getElementById('hamburgerBtn');
+        const menu = document.getElementById('mobileMenu');
+
+        btn.addEventListener('click', () => {
+            btn.classList.toggle('open');
+            menu.classList.toggle('open');
+        });
+
+        // 메뉴 링크 클릭 시 닫기
+        menu.querySelectorAll('a').forEach(link => {
+            link.addEventListener('click', () => {
+                btn.classList.remove('open');
+                menu.classList.remove('open');
+            });
+        });
+    </script>
+</body>
+</html>
